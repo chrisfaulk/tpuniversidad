@@ -1,0 +1,39 @@
+# depslib dependency file v1.0
+1726591975 source:c:\users\cfaulkner\desktop\a\bmpmanipulator\funciones_benitez.c
+	"funciones_benitez.h"
+
+1726592108 c:\users\cfaulkner\desktop\a\bmpmanipulator\funciones_benitez.h
+	"estructuras.h"
+	<string.h>
+
+1726592090 c:\users\cfaulkner\desktop\a\bmpmanipulator\estructuras.h
+
+1726592013 source:c:\users\cfaulkner\desktop\a\bmpmanipulator\funciones_faulkner.c
+	"funciones_faulkner.h"
+
+1726592121 c:\users\cfaulkner\desktop\a\bmpmanipulator\funciones_faulkner.h
+	"estructuras.h"
+	<stdio.h>
+	<string.h>
+
+1726592048 source:c:\users\cfaulkner\desktop\a\bmpmanipulator\funciones_grupo.c
+	"funciones_grupo.h"
+
+1726592146 c:\users\cfaulkner\desktop\a\bmpmanipulator\funciones_grupo.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"estructuras.h"
+	"funciones_benitez.h"
+	"funciones_menendez.h"
+	"funciones_faulkner.h"
+
+1726592164 c:\users\cfaulkner\desktop\a\bmpmanipulator\funciones_menendez.h
+	"estructuras.h"
+
+1726592066 source:c:\users\cfaulkner\desktop\a\bmpmanipulator\funciones_menendez.c
+	"funciones_menendez.h"
+
+1726592178 source:c:\users\cfaulkner\desktop\a\bmpmanipulator\main.c
+	"funciones_grupo.h"
+
