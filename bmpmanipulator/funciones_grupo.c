@@ -24,62 +24,75 @@ int solucion(int argc, char* argv[])
                 if(buscarSiSeUso(16,funcionesUsadas,nombre)==0){
                     funcionesUsadas[cantFuncionesUsadas] = nombre;
                     cantFuncionesUsadas++;
+                    char nombreArchivo[TAM_MAX];
                     if (strcmpi(nombre,"--negativo")==0){
                         imagenNegativo(imagen1,matriz1);
-                        printf("hola");
-                        guardarImagen(&imagen1,matriz1,strcat("AUSTROLOPITECO_negativo_",nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_negativo_%s", nombreImagen);
+                        guardarImagen(&imagen1,matriz1,nombreArchivo);
                         printf("aca");
                     }
                     else if (strcmpi(nombre,"--escala-de-grises")==0){
                         aplicarEscalaDeGrises((S_color *)matriz1,imagen1.alto, imagen1.ancho);
-                        guardarImagen(&imagen1,matriz1,strcat("AUSTROLOPITECO_escala-de-grises_",nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_escala-de-grises_%s", nombreImagen);
+                        guardarImagen(&imagen1,matriz1,nombreArchivo);
                     }
                     else if (strcmpi(nombre,"--espejar-horizontal")==0){
                         espejarHorizontal((S_color *)matriz1, imagen1.alto, imagen2.ancho);
-                        guardarImagen(&imagen1,matriz1,strcat("AUSTROLOPITECO_espejar-horizontal_",nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_espejar-horizontal_%s", nombreImagen);
+                        guardarImagen(&imagen1,matriz1,nombreArchivo);
                     }
                     else if (strcmpi(nombre,"--espejar-vertical")==0){
                         espejarVertical(imagen1,matriz1);
-                        guardarImagen(&imagen1,matriz1,strcat("AUSTROLOPITECO_espejar-vertical_",nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_espejar-vertical_%s", nombreImagen);
+                        guardarImagen(&imagen1,matriz1,nombreArchivo);
                     }
                     else if (strcmpi(nombre,"--aumentar-contraste")==0){
                         aumentarContraste(imagen1,matriz1,(float) valor);
-                        guardarImagen(&imagen1,matriz1,strcat("AUSTROLOPITECO_aumentar-contraste_",nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_aumentar-contraste_%s", nombreImagen);
+                        guardarImagen(&imagen1,matriz1,nombreArchivo);
                     }
                     else if (strcmpi(nombre,"--reducir-contraste")==0){
                         reducirContraste((S_color *)matriz1, imagen1.alto, imagen2.alto, valor);
-                        guardarImagen(&imagen1,matriz1,strcat("AUSTROLOPITECO_reducir-contraste_",nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_reducir-contraste_%s", nombreImagen);
+                        guardarImagen(&imagen1,matriz1,nombreArchivo);
                     }
                     else if (strcmpi(nombre,"--tonalidad-azul")==0){
                         tonalidadAzul(imagen1,matriz1,valor);
-                        guardarImagen(&imagen1,matriz1,strcat("AUSTROLOPITECO_tonalidad-azul_",nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_tonalidad-azul_%s", nombreImagen);
+                        guardarImagen(&imagen1,matriz1,nombreArchivo);
                     }
                     else if (strcmpi(nombre,"--tonalidad-verde")==0){
                         tonalidadVerde(imagen1,matriz1, porcentaje);
-                        guardarImagen(&imagen1,matriz1,strcat("AUSTROLOPITECO_tonalidad-verde_", nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_tonalidad-verde_%s", nombreImagen);
+                        guardarImagen(&imagen1,matriz1,nombreArchivo);
                     }
                     else if (strcmpi(nombre,"--tonalidad-roja")==0){
                         aumentarTonalidadRoja((S_color *)matriz1, imagen1.alto, imagen2.ancho, (float) valor);
-                        guardarImagen(&imagen1, matriz1, strcat("AUSTROLOPITECO_tonalidad-roja_",nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_tonalidad-roja_%s", nombreImagen);
+                        guardarImagen(&imagen1, matriz1, nombreArchivo);
                     }
                     else if (strcmpi(nombre,"--recortar")==0){
                         int nuevoAlto = imagen1.alto - (imagen1.alto*porcentaje);
                         int nuevoAncho = imagen1.ancho - (imagen1.ancho*porcentaje);
                         S_color matriz2[nuevoAlto][nuevoAncho];
                         recortar(imagen1, matriz1,nuevoAlto, nuevoAncho, matriz2);
-                        guardarImagen(&imagen1, matriz1, strcat("AUSTROLOPITECO_recortar_", nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_recortar_%s", nombreImagen);
+                        guardarImagen(&imagen1, matriz1, nombreArchivo);
                     }
                     else if (strcmpi(nombre,"--achicar")==0){
                         achicarImagen((S_color *)matriz1, imagen1.alto, imagen1.ancho, (float) valor);
-                        guardarImagen(&imagen1, matriz1,strcat("AUSTROLOPITECO_achicar_",nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_achicar_%s", nombreImagen);
+                        guardarImagen(&imagen1, matriz1,nombreArchivo);
                     }
                     else if (strcmpi(nombre,"--rotar-derecha")==0){
                         rotar(imagen1, matriz1, 0);
-                        guardarImagen(&imagen1, matriz1, strcat("AUSTROLOPITECO_rotar-derecha_", nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_rotar-derecha_%s", nombreImagen);
+                        guardarImagen(&imagen1, matriz1, nombreArchivo);
                     }
                     else if (strcmpi(nombre,"--rotar-izquierda")==0){
                         rotar(imagen1, matriz1, 1);
-                        guardarImagen(&imagen1, matriz1, strcat("AUSTROLOPITECO_rotar-izquierda_", nombreImagen));
+                        snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_rotar-izquierda_%s", nombreImagen);
+                        guardarImagen(&imagen1, matriz1,nombreArchivo);
                     }
                     else if (strcmpi(nombre,"--concatenar-horizontal")==0){
                         encontrarImagen(argc,argv,&imagen2,&indiceImg1,&cantImagenes);
@@ -89,7 +102,8 @@ int solucion(int argc, char* argv[])
                             int nuevoAncho = imagen1.ancho + imagen2.ancho;
                             S_color matriz3[nuevoAlto][nuevoAncho];
                             concatenarHorizontal(imagen1,imagen2, &imagen3, matriz1, matriz2, nuevoAlto, nuevoAncho, matriz3);
-                            guardarImagen(&imagen3,matriz3,strcat("AUSTROLOPITECO_concatenar-horizontal_",nombreImagen));
+                            snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_concatenar-horizontal_%s", nombreImagen);
+                            guardarImagen(&imagen3,matriz3,nombreArchivo);
                         }
                         else {
                             printf("La funcion concatenar-horizontal no pudo ejecutarse porque necesita dos imagenes y solo se envio una. ");
@@ -103,7 +117,8 @@ int solucion(int argc, char* argv[])
                             int nuevoAncho = mayor(imagen1.ancho, imagen2.ancho);
                             S_color matriz3[nuevoAlto][nuevoAncho];
                             concatenarVertical(imagen1, imagen2, &imagen3, matriz1, matriz2, nuevoAlto, nuevoAncho, matriz3);
-                            guardarImagen(&imagen3, matriz3, strcat("AUSTROLOPITECO_concatenar_vertical_", nombreImagen));
+                            snprintf(nombreArchivo, TAM_MAX, "AUSTROLOPITECO_concatenar-vertical_%s", nombreImagen);
+                            guardarImagen(&imagen3, matriz3, nombreArchivo);
                         }
                         else {
                             printf("La funcion concatenar-vertical no pudo ejecutarse porque necesita dos imagenes y solo se envio una. ");
@@ -239,9 +254,8 @@ int buscarSiSeUso(int cant, char *vec[], const char *buscado) {
 
 int guardarImagen(SARCHIVO *imagen, S_color matriz[imagen->alto][imagen->ancho], char nombreArchivo[TAM_MAX])
 {
-    printf("hola123");
     FILE* fi;
-    fi = fopen("C:/Users/cfaulkner/Desktop/imagen.bmp", "wb");
+    fi = fopen(nombreArchivo, "wb");
     if(!fi)
     {
         printf("La imagen no se pudo crear\n");
@@ -253,12 +267,13 @@ int guardarImagen(SARCHIVO *imagen, S_color matriz[imagen->alto][imagen->ancho],
 
     for (int f = 0; f < imagen->alto; f++) {
         for (int c = 0; c < imagen->ancho; c++) {
-            int indice = f * desplazamiento_con_relleno + c * 3;
+            indice = f*desplazamiento_con_relleno + c;
             imagen->pixel[indice].azul = matriz[f][c].azul;
             imagen->pixel[indice].verde = matriz[f][c].verde;
             imagen->pixel[indice].rojo = matriz[f][c].rojo;
         }
     }
+
     fwrite(&imagen->bm, sizeof(char), 1, fi);
     fwrite(&imagen->tamanioArchivo, sizeof(int), 1, fi);
     fwrite(&imagen->reservado, sizeof(int), 1, fi);
@@ -275,13 +290,12 @@ int guardarImagen(SARCHIVO *imagen, S_color matriz[imagen->alto][imagen->ancho],
     fwrite(&imagen->coloresUsados, sizeof(int), 1, fi);
     fwrite(&imagen->coloresImportantes, sizeof(int), 1, fi);
 
-    printf("aca");
-    fwrite(&imagen->pixel, sizeof(S_color), imagen->tamanioImagen, fi);
+    fwrite(imagen->pixel, sizeof(S_color), imagen->tamanioImagen, fi);
 
 
     fclose(fi);
 
-    printf("\t El archivo %s se creo correctamente. \n",nombreArchivo);
+    printf("\n El archivo %s se creo correctamente. \n",nombreArchivo);
 
     return 1;
 }

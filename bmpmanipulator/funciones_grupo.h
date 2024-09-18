@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
-#define TAM_MAX 50
+#define TAM_MAX 100
 #define TAM_IMG 2000
 #include "estructuras.h"
 

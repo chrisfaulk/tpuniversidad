@@ -44,7 +44,7 @@
 	"estructuras.h"
 	<string.h>
 
-1726619955 c:\users\chris\desktop\b\bmpmanipulator\estructuras.h
+1726700762 c:\users\chris\desktop\b\bmpmanipulator\estructuras.h
 
 1726619955 source:c:\users\chris\desktop\b\bmpmanipulator\funciones_faulkner.c
 	"funciones_faulkner.h"
@@ -63,7 +63,7 @@
 1726619956 source:c:\users\chris\desktop\b\bmpmanipulator\main.c
 	"funciones_grupo.h"
 
-1726627522 c:\users\chris\desktop\b\bmpmanipulator\funciones_grupo.h
+1726697865 c:\users\chris\desktop\b\bmpmanipulator\funciones_grupo.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -72,6 +72,6 @@
 	"funciones_menendez.h"
 	"funciones_faulkner.h"
 
-1726625970 source:c:\users\chris\desktop\b\bmpmanipulator\funciones_grupo.c
+1726700513 source:c:\users\chris\desktop\b\bmpmanipulator\funciones_grupo.c
 	"funciones_grupo.h"
 
