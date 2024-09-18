@@ -4,6 +4,7 @@
 	<Project>
 		<Option title="bmpmanipulator" />
 		<Option pch_mode="2" />
+		<Option default_target="Release" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
@@ -11,7 +12,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters='bmpmanipulator.exe &quot;C:\Users\cfaulkner\Desktop\a\bmpmanipulator\unlam.bmp&quot; --negativo' />
+				<Option parameters='bmpmanipulator.exe &quot;unlam.bmp&quot; --negativo' />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -21,7 +22,7 @@
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters='bmpmanipulator.exe &quot;C:\Users\cfaulkner\Desktop\a\bmpmanipulator\unlam.bmp&quot; --negativo' />
+				<Option parameters='bmpmanipulator.exe &quot;unlam.bmp&quot; --negativo' />
 				<Compiler>
 					<Add option="-O2" />
 				</Compiler>
