@@ -4,23 +4,17 @@
 int solucion(int argc, char* argv[])
 {
     SARCHIVO imagen1, imagen2, imagen3;
-    int valor, indiceImg1 = 0, indiceImg2 = 0;
+    int valor, indiceImg1 = 0, cantImagenes = 0;
     char nombre[TAM_MAX];
     char nombreImagen[TAM_MAX];
-    encontrarImagen(argc, argv, &imagen1, &imagen2, &indiceImg1, &indiceImg2);
-    printf("imagen alto: %d", imagen1.alto);
+    encontrarImagen(argc, argv, &imagen1, &indiceImg1,&cantImagenes);
     strcpy(nombreImagen, argv[indiceImg1]);
     S_color matriz1[imagen1.alto][imagen1.ancho];
     llenarMatriz(imagen1, matriz1);
-    printf("\n todo bien");
-    S_color matriz2[imagen2.alto][imagen2.ancho];
     char *funcionesUsadas[16];
     int cantFuncionesUsadas=0;
-    if (indiceImg2 != 0){
-        llenarMatriz(imagen2, matriz2);
-    }
     for (int i=1;i<argc;i++){
-        if (i !=  indiceImg1 && i != indiceImg2){
+        if (i != (int) indiceImg1){
             llamarFuncion(argv[i],nombre,&valor);
             if (valor<0 || valor > 100){
                 printf("El valor introducido en la funcion %s es invalido, por lo que no se pudo ejecutar la función.", nombre);
@@ -32,7 +26,9 @@ int solucion(int argc, char* argv[])
                     cantFuncionesUsadas++;
                     if (strcmpi(nombre,"--negativo")==0){
                         imagenNegativo(imagen1,matriz1);
+                        printf("hola");
                         guardarImagen(&imagen1,matriz1,strcat("AUSTROLOPITECO_negativo_",nombreImagen));
+                        printf("aca");
                     }
                     else if (strcmpi(nombre,"--escala-de-grises")==0){
                         aplicarEscalaDeGrises((S_color *)matriz1,imagen1.alto, imagen1.ancho);
@@ -69,11 +65,12 @@ int solucion(int argc, char* argv[])
                     else if (strcmpi(nombre,"--recortar")==0){
                         int nuevoAlto = imagen1.alto - (imagen1.alto*porcentaje);
                         int nuevoAncho = imagen1.ancho - (imagen1.ancho*porcentaje);
+                        S_color matriz2[nuevoAlto][nuevoAncho];
                         recortar(imagen1, matriz1,nuevoAlto, nuevoAncho, matriz2);
                         guardarImagen(&imagen1, matriz1, strcat("AUSTROLOPITECO_recortar_", nombreImagen));
                     }
                     else if (strcmpi(nombre,"--achicar")==0){
-                        achicarImagen((S_color *)matriz1, imagen1.alto, imagen2.ancho, (float) valor);
+                        achicarImagen((S_color *)matriz1, imagen1.alto, imagen1.ancho, (float) valor);
                         guardarImagen(&imagen1, matriz1,strcat("AUSTROLOPITECO_achicar_",nombreImagen));
                     }
                     else if (strcmpi(nombre,"--rotar-derecha")==0){
@@ -85,34 +82,38 @@ int solucion(int argc, char* argv[])
                         guardarImagen(&imagen1, matriz1, strcat("AUSTROLOPITECO_rotar-izquierda_", nombreImagen));
                     }
                     else if (strcmpi(nombre,"--concatenar-horizontal")==0){
-                        if (indiceImg2!=0){
+                        encontrarImagen(argc,argv,&imagen2,&indiceImg1,&cantImagenes);
+                        if (cantImagenes > 2){
+                            S_color matriz2[imagen2.alto][imagen2.ancho];
                             int nuevoAlto = mayor(imagen1.alto, imagen2.alto);
                             int nuevoAncho = imagen1.ancho + imagen2.ancho;
                             S_color matriz3[nuevoAlto][nuevoAncho];
                             concatenarHorizontal(imagen1,imagen2, &imagen3, matriz1, matriz2, nuevoAlto, nuevoAncho, matriz3);
                             guardarImagen(&imagen3,matriz3,strcat("AUSTROLOPITECO_concatenar-horizontal_",nombreImagen));
                         }
-                        else{
-                            printf("El filtro concatenar horizontal no se pudo aplicar porque solamente se adjunto una imagen");
+                        else {
+                            printf("La funcion concatenar-horizontal no pudo ejecutarse porque necesita dos imagenes y solo se envio una. ");
                         }
-                    }
+                }
                     else if (strcmpi(nombre,"--concatenar-vertical")==0){
-                        if (indiceImg2!=0){
+                        encontrarImagen(argc,argv,&imagen2,&indiceImg1,&cantImagenes);
+                        if (cantImagenes > 2){
+                            S_color matriz2[imagen2.alto][imagen2.ancho];
                             int nuevoAlto = imagen1.alto + imagen2.alto;
                             int nuevoAncho = mayor(imagen1.ancho, imagen2.ancho);
                             S_color matriz3[nuevoAlto][nuevoAncho];
                             concatenarVertical(imagen1, imagen2, &imagen3, matriz1, matriz2, nuevoAlto, nuevoAncho, matriz3);
                             guardarImagen(&imagen3, matriz3, strcat("AUSTROLOPITECO_concatenar_vertical_", nombreImagen));
                         }
-                        else{
-                            printf("El filtro concatenar vertical no se pudo aplicar porque solamente se adjunto una imagen");
+                        else {
+                            printf("La funcion concatenar-vertical no pudo ejecutarse porque necesita dos imagenes y solo se envio una. ");
                         }
                     }
                     else if (strcmpi(nombre,"--comodin")==0){
 
                     }
                     else {
-                        printf("La funcion  %s no existe.\n", nombre);
+                        printf("La funcion  %s no existe.\n", argv[i]);
                         cantFuncionesUsadas--;
                     }
                 }
@@ -125,25 +126,20 @@ int solucion(int argc, char* argv[])
     return 0;
 }
 
-void encontrarImagen(int argc, char *argv[], SARCHIVO* imagen1, SARCHIVO* imagen2, int* indiceImg1, int* indiceImg2) {
+void encontrarImagen(int argc, char *argv[], SARCHIVO* imagen1, int* indiceImg1, int* cantImagenes) {
     const char* buscado = ".bmp";
-    int band = 0;
 
     for (int i = 1; i < argc; ++i) { // Empieza en 1 para omitir el nombre del programa
         if (strstr(argv[i], buscado) != NULL) {
-            if (band == 0) {
+            if (i != (int) indiceImg1) {
                 *imagen1 = cargarDatos(argv[i]);
                 *indiceImg1 = i;
-                band++;
-            } else if (band == 1) {
-                *imagen2 = cargarDatos(argv[i]);
-                *indiceImg2 = i;
-                band++;
+                (*cantImagenes)++;
             }
         }
     }
 
-    if (band == 0) {
+    if (*cantImagenes == 0) {
         fprintf(stderr, "No se recibio ninguna imagen\n");
         exit(EXIT_FAILURE);
     }
@@ -204,10 +200,9 @@ void llenarMatriz(SARCHIVO const imagen, S_color mat[imagen.alto][imagen.ancho])
         for(c=0;c<imagen.ancho;c++)
         {
             int indice = f*desplazamiento_con_relleno + c*3;
-            mat[f][c].azul = imagen.pixel[indice].azul;
-            printf("\n todo bien %d %d", f, c);
-            mat[f][c].verde = imagen.pixel[indice].verde;
-            mat[f][c].rojo = imagen.pixel[indice].rojo;
+            mat[f][c].azul = (int) &imagen.pixel[indice].azul;
+            mat[f][c].verde = (int) &imagen.pixel[indice].verde;
+            mat[f][c].rojo = (int) &imagen.pixel[indice].rojo;
         }
     }
 }
@@ -228,24 +223,23 @@ void llamarFuncion(const char *cadena, char *nombre, int *valor){
         *valor = atoi(val);
     }
     else {
-        strncpy(nombre, "", TAM);
+        strcpy(nombre, cadena);
         *valor = 0;
     }
 }
 
-int buscarSiSeUso (int cant, char *vec[], const char *buscado){
-     for(int i=0;i<cant;i++)
-     {
-         if(strcmpi(vec[i],buscado)==0)
-         {
-             return 1;
-         }
-     }
-     return 0;
- }
+int buscarSiSeUso(int cant, char *vec[], const char *buscado) {
+    for (int i = 0; i < cant; i++) {
+        if (&vec[i] != NULL && strcmpi(&vec[i], buscado) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 int guardarImagen(SARCHIVO *imagen, S_color matriz[imagen->alto][imagen->ancho], char nombreArchivo[TAM_MAX])
 {
+    printf("hola123");
     FILE* fi;
     fi = fopen("C:/Users/cfaulkner/Desktop/imagen.bmp", "wb");
     if(!fi)
@@ -281,7 +275,8 @@ int guardarImagen(SARCHIVO *imagen, S_color matriz[imagen->alto][imagen->ancho],
     fwrite(&imagen->coloresUsados, sizeof(int), 1, fi);
     fwrite(&imagen->coloresImportantes, sizeof(int), 1, fi);
 
-    fwrite(imagen->pixel, sizeof(S_color), imagen->tamanioImagen, fi);
+    printf("aca");
+    fwrite(&imagen->pixel, sizeof(S_color), imagen->tamanioImagen, fi);
 
 
     fclose(fi);

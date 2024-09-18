@@ -8,9 +8,9 @@ void imagenNegativo(SARCHIVO img, S_color mat[img.alto][img.ancho])
         for(int x=0;x<img.ancho;x++)
         {
             posicion=y * cantidad_pixeles + x * 3; //x*3 para saber el desplazamiento
-            (mat[y][x]).azul = 255 - img.pixel[posicion].azul;
-            (mat[y][x]).verde = 255 - img.pixel[posicion].verde;
-            (mat[y][x]).rojo = 255 - img.pixel[posicion].rojo;
+            (mat[y][x]).azul = 255 - (int) &img.pixel[posicion].azul;
+            (mat[y][x]).verde = 255 - (int) &img.pixel[posicion].verde;
+            (mat[y][x]).rojo = 255 - (int) &img.pixel[posicion].rojo;
         }
     }
 }

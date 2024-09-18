@@ -37,3 +37,41 @@
 1726592178 source:c:\users\cfaulkner\desktop\a\bmpmanipulator\main.c
 	"funciones_grupo.h"
 
+1726626084 source:c:\users\chris\desktop\b\bmpmanipulator\funciones_benitez.c
+	"funciones_benitez.h"
+
+1726619955 c:\users\chris\desktop\b\bmpmanipulator\funciones_benitez.h
+	"estructuras.h"
+	<string.h>
+
+1726619955 c:\users\chris\desktop\b\bmpmanipulator\estructuras.h
+
+1726619955 source:c:\users\chris\desktop\b\bmpmanipulator\funciones_faulkner.c
+	"funciones_faulkner.h"
+
+1726619955 c:\users\chris\desktop\b\bmpmanipulator\funciones_faulkner.h
+	"estructuras.h"
+	<stdio.h>
+	<string.h>
+
+1726619956 source:c:\users\chris\desktop\b\bmpmanipulator\funciones_menendez.c
+	"funciones_menendez.h"
+
+1726619956 c:\users\chris\desktop\b\bmpmanipulator\funciones_menendez.h
+	"estructuras.h"
+
+1726619956 source:c:\users\chris\desktop\b\bmpmanipulator\main.c
+	"funciones_grupo.h"
+
+1726627522 c:\users\chris\desktop\b\bmpmanipulator\funciones_grupo.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"estructuras.h"
+	"funciones_benitez.h"
+	"funciones_menendez.h"
+	"funciones_faulkner.h"
+
+1726625970 source:c:\users\chris\desktop\b\bmpmanipulator\funciones_grupo.c
+	"funciones_grupo.h"
+

@@ -14,7 +14,7 @@
 
 int solucion(int argc, char* argv[]);
 
-void encontrarImagen(int argc,char* argv[], SARCHIVO*, SARCHIVO*, int*, int*);
+void encontrarImagen(int argc,char* argv[], SARCHIVO*, int*, int*);
 
 SARCHIVO cargarDatos(char[]);
 
